@@ -130,13 +130,13 @@ def find_shortest_transformation_sequence(graph:Graph, supplies:dict, demand:dic
         if is_demand_met(current_inventory, demand):
             return sequence
 
-        for idx, (inputs, outputs) in enumerate(graph.graph.values()):
+        for index, (inputs, outputs) in enumerate(graph.graph.values()):
             if can_apply_transformation(current_inventory, inputs):
                 new_inventory = apply_transformation(current_inventory, inputs, outputs)
                 serialized_inventory = tuple(sorted(new_inventory.items()))
                 if serialized_inventory not in visited:
                     visited.add(serialized_inventory)
-                    queue.append((new_inventory, sequence + [idx + 1]))
+                    queue.append((new_inventory, sequence + [index + 1]))
 
     return "No solution"
 
@@ -147,8 +147,11 @@ def driver():
         supply_dict = process_supplies(supplies)
         demand_dict = process_demand(demand)
         result = find_shortest_transformation_sequence(transition_graph, supply_dict, demand_dict)
+        if(type(result) == list):
+            result = ' '.join(map(str, result))
         print(result)
         return result
 
-if __name__ == "__main__":
-    driver()
+# if __name__ == "__main__":
+    # driver()
+driver()

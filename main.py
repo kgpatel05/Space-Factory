@@ -1,3 +1,14 @@
+'''
+    Krish Patel
+    kpatel46@u.rochester.edu
+    Approximate Time: 3 hours
+    My code for the space factory homework set works to create a graph of transitions representing
+    the possible transformations that can be made with the given supplies. Using a breadth
+    first search algorithm, the code finds the shortest path to meet the demand (if possible) and
+    prints/returns the transitions used to do so. Each number represents the index of the transition
+    based on the input list.
+'''
+
 from collections import deque
 
 class Graph:
@@ -5,12 +16,7 @@ class Graph:
         self.graph = {}
 
     def add_edge(self, u: str, v: tuple):
-        """
-        Add an edge to the graph.
-        :param u: The transition identifier (e.g., 'trans_0').
-        :param v: A tuple containing (inputs, outputs).
-        """
-        self.graph[u] = v  # Store only (inputs, outputs) without weights
+        self.graph[u] = v
 
     def print_graph(self):
         for u, (inputs, outputs) in self.graph.items():
@@ -19,7 +25,8 @@ class Graph:
 
 def read_input() -> tuple:  
     try:
-        numtransitions = int(input("Enter the number of transitions: "))
+        # numtransitions = int(input("Enter the number of transitions: "))
+        numtransitions = int(input())
     except ValueError:
         print("Invalid input. Please enter a valid number.")
         return None, None, None
@@ -28,7 +35,8 @@ def read_input() -> tuple:
     
     for i in range(1, numtransitions + 1):
         while True:  # Keep asking until a valid transition is entered
-            transition = input(f"Enter transition {i}: ").strip()
+            # transition = input(f"Enter transition {i}: ").strip()
+            transition = input().strip()
             if "->" in transition:
                 transitions.append(transition)
                 break
@@ -36,8 +44,10 @@ def read_input() -> tuple:
                 print("Invalid format. Please include '->' in the transition.")
 
     try:
-        supplies = input("Enter the supplies: ").strip()
-        demand = input("Enter the demand: ").strip()
+        # supplies = input("Enter the supplies: ").strip()
+        supplies = input().strip()
+        # demand = input("Enter the demand: ").strip()
+        demand = input().strip()
     except ValueError:
         print("Invalid input. Please enter valid supplies and demand.")
         return None, None, None
@@ -152,6 +162,4 @@ def driver():
         print(result)
         return result
 
-# if __name__ == "__main__":
-    # driver()
 driver()
